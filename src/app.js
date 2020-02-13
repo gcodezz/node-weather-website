@@ -6,15 +6,12 @@ const forecast = require('./utils/forecast')
 
 const app = express()
 
-//Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
 
-//Setup handlebars and views location
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, '../templates/views'))
 hbs.registerPartials(path.join(__dirname, '../templates/partials'))
 
-//Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) => {
@@ -41,7 +38,6 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
 
-    //console.log(req.query.address)
     if(!req.query.address){
         return res.send({
             error: 'No address'
