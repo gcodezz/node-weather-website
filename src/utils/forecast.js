@@ -10,10 +10,15 @@ const forecast = (latitude, longitude, callback) => {
         } else if(body.error){
             callback('Unable to find location', undefined)
         } else{
-            var temp = body.currently.temperature
-            temp = (temp - 32) * (5/9)
-            temp = parseFloat(temp).toFixed(2)
-            callback(undefined, body.daily.data[0].summary + ' It is currently '+ temp + ' degree celsius. There is a ' + body.currently.precipProbability + '% chance of rain')
+            tempConverter = temp => {
+                temp = (temp - 32) * (5/9)
+                return parseFloat(temp).toFixed(2)
+            }
+
+            temp1 = tempConverter(body.currently.temperature)
+            temp3 = tempConverter(body.daily.data[0].temperatureLow)
+            temp2 = tempConverter(body.daily.data[0].temperatureHigh)
+            callback(undefined, body.daily.data[0].summary + ' It is currently '+ temp1 + ' degree celsius. The high today is ' + temp2 + ' with a low of ' + temp3 + '. There is a ' + body.currently.precipProbability + '% chance of rain')
         }
     })
 }
