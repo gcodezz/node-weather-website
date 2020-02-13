@@ -13,7 +13,7 @@ const forecast = (latitude, longitude, callback) => {
             var temp = body.currently.temperature
             temp = (temp - 32) * (5/9)
             temp = parseFloat(temp).toFixed(2)
-            callback(undefined, body.daily.data[0].summary + ' It is currently '+ temp + ' degree Celsius. There is a ' + body.currently.precipProbability + '% chance of rain')
+            callback(undefined, body.daily.data[0].summary + ' It is currently '+ temp + ' degree celsius. There is a ' + body.currently.precipProbability + '% chance of rain')
         }
     })
 }
